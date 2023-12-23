@@ -1,7 +1,11 @@
 import AuthInstance from "@/api/config/auth";
 import CategoryInstance from "@/api/config/category";
 import { LOGIN_URL, LOGOUT_URL } from "../urls/authurl";
-import { GET_ALL_CATEGORY_TREE, GET_ALL_CATEGORY } from "../urls/categoryurl";
+import {
+  GET_ALL_CATEGORY_TREE,
+  GET_ALL_CATEGORY,
+  CREATE_CATEGORY,
+} from "../urls/categoryurl";
 
 const headers = {
   headers: {
@@ -32,6 +36,15 @@ export const ApiCallGateway = {
     getAllCategory: async (request) => {
       const response = await CategoryInstance.post(
         GET_ALL_CATEGORY,
+        request,
+        headers
+      );
+      return response;
+    },
+
+    createCategory: async (request) => {
+      const response = await CategoryInstance.post(
+        CREATE_CATEGORY,
         request,
         headers
       );

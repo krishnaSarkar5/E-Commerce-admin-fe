@@ -12,7 +12,7 @@ import Add from "@mui/icons-material/Add";
 const AppModal = ({ show, setShow, title, children }) => {
   return (
     <Modal open={show} onClose={() => setShow(false)}>
-      <ModalDialog>
+      <ModalDialog size="lg" sx={{ width: "40%", overflowY: "scroll" }}>
         <DialogTitle>{title}</DialogTitle>
         {/* <DialogContent>Fill in the information of the project.</DialogContent> */}
         {children}
