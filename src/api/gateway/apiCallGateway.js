@@ -5,6 +5,7 @@ import {
   GET_ALL_CATEGORY_TREE,
   GET_ALL_CATEGORY,
   CREATE_CATEGORY,
+  DELETE_CATEGORY,
 } from "../urls/categoryurl";
 
 const headers = {
@@ -45,6 +46,15 @@ export const ApiCallGateway = {
     createCategory: async (request) => {
       const response = await CategoryInstance.post(
         CREATE_CATEGORY,
+        request,
+        headers
+      );
+      return response;
+    },
+
+    deteteCategory: async (request) => {
+      const response = await CategoryInstance.post(
+        DELETE_CATEGORY,
         request,
         headers
       );

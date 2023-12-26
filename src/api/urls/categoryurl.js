@@ -7,3 +7,5 @@ export const GET_ALL_CATEGORY_TREE = "/get-all-category-tree";
 export const GET_ALL_CATEGORY = "/get-all-category";
 
 export const CREATE_CATEGORY = "/create-category";
+
+export const DELETE_CATEGORY = "/delete-category";

@@ -8,6 +8,7 @@ import Sheet from "@mui/joy/Sheet";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -20,7 +21,7 @@ const rows = [
   createData("4", 305, 3.7, 67, 4.3),
 ];
 
-const AppTable = ({ data, tableConfig }) => {
+const AppTable = ({ data, tableConfig, activeDeleteAction, deleteAction }) => {
   console.log("+-+- ", data);
   return data?.length > 0 ? (
     <Box>
@@ -104,22 +105,32 @@ const AppTable = ({ data, tableConfig }) => {
           </thead>
           <tbody>
             {data?.length > 0 &&
-              data?.map((row, index) => (
-                <tr>
-                  {tableConfig?.length > 0 &&
-                    tableConfig?.map((tc) => <td>{row[tc.fieldName]}</td>)}
-                  <td>
-                    <Box sx={{ display: "flex", gap: 1 }}>
-                      <Button size="sm" variant="plain" color="neutral">
-                        <ModeEditOutlineIcon />
-                      </Button>
-                      <Button size="sm" variant="soft" color="danger">
-                        <DeleteIcon />
-                      </Button>
-                    </Box>
-                  </td>
-                </tr>
-              ))}
+              data?.map((row, index) => {
+                const deleteEnable = activeDeleteAction(row);
+
+                return (
+                  <tr>
+                    {tableConfig?.length > 0 &&
+                      tableConfig?.map((tc) => <td>{row[tc.fieldName]}</td>)}
+                    <td>
+                      <Box sx={{ display: "flex", gap: 1 }}>
+                        <Button size="sm" variant="plain" color="neutral">
+                          <RemoveRedEyeIcon />
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="soft"
+                          color="danger"
+                          disabled={!deleteEnable}
+                          onClick={() => deleteAction(row)}
+                        >
+                          <DeleteIcon />
+                        </Button>
+                      </Box>
+                    </td>
+                  </tr>
+                );
+              })}
             {/* {rows.map((row) => (
             <tr key={row.name}>
               <td>{row.name}</td>

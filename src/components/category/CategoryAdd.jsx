@@ -17,7 +17,7 @@ import { ApiCallGateway } from "@/api/gateway/apiCallGateway";
 import successAlert from "../alert/sucessAlert";
 import failureAlert from "../alert/failureAlert";
 
-const CategoryAdd = () => {
+const CategoryAdd = ({ setRefreshData }) => {
   const [show, setShow] = useState(false);
 
   return (
@@ -28,7 +28,7 @@ const CategoryAdd = () => {
 
       {show && (
         <AppModal setShow={setShow} show={show} title="Create New Category">
-          <CategoryAddForm setShow={setShow} />
+          <CategoryAddForm setShow={setShow} setRefreshData={setRefreshData} />
         </AppModal>
       )}
     </>
@@ -37,7 +37,7 @@ const CategoryAdd = () => {
 
 export default CategoryAdd;
 
-const CategoryAddForm = ({ setShow }) => {
+const CategoryAddForm = ({ setShow, setRefreshData }) => {
   const [rootCategory, setRootCategory] = useState(true);
 
   const [categoryList, setCategoryList] = useState([]);
@@ -59,6 +59,7 @@ const CategoryAddForm = ({ setShow }) => {
 
     if (response?.status === 200) {
       successAlert("Success", "Category Created");
+      setRefreshData(true);
       setShow(false);
     } else {
       failureAlert("Failed", "Something went wrong");
